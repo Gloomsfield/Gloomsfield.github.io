@@ -44,7 +44,7 @@ class Menu extends Phaser.Scene {
 			fixedWidth: 0,
 		};
 
-		let menu_accent_config = menu_config;
+		let menu_accent_config = JSON.parse(JSON.stringify(menu_config));
 		menu_accent_config.backgroundColor = '#00ff00';
 		menu_accent_config.color = '#000000';
 
@@ -64,7 +64,7 @@ class Menu extends Phaser.Scene {
 
 		this.add.text(
 			game.config.width / 2,
-			game.config.height / 2,
+			game.config.height / 2 + ui_border_size + ui_border_padding,
 			'Press <- for Novice or -> for Expert.',
 			menu_accent_config
 		).setOrigin(0.5, 0);
