@@ -107,7 +107,7 @@ class Play extends Phaser.Scene {
 
 				if(this.check_collision(this.rocket, this.ships[i])) {
 					this.rocket.reset();
-					this.ships[i].reset();
+					this.ship_explode(this.ships[i]);
 				}
 			}
 		}
@@ -124,6 +124,18 @@ class Play extends Phaser.Scene {
 		}
 
 		return true;
+	}
+
+	ship_explode(ship) {
+		ship.alpha = 0;
+
+		let explosion_sprite = this.add.sprite(ship.x, ship.y, 'ship_explosion').setOrigin(0, 0);
+		explosion_sprite.anims.play('ship_explode');
+		explosion_sprite.on('animationcomplete', () => {
+			ship.reset();
+			ship.alpha = 1;
+			explosion_sprite.destroy();
+		});
 	}
 }
 
