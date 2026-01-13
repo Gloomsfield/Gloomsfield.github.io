@@ -94,6 +94,28 @@ class Play extends Phaser.Scene {
 		key_reset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 		key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
 		key_right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+		this.score = 0;
+
+		let score_config = {
+			fontFamily: 'Courier',
+			fontSize: '28px',
+			backgroundColor: '#f3b141',
+			color: '#843605',
+			align: 'right',
+			padding: {
+				top: 5,
+				bottom: 5,
+			},
+			fixedWidth: 100,
+		};
+
+		this.score_text = this.add.text(
+			ui_border_size + ui_border_padding,
+			ui_border_size + ui_border_padding * 2,
+			this.score,
+			score_config
+		);
 	}
 
 	update() {
@@ -136,6 +158,9 @@ class Play extends Phaser.Scene {
 			ship.alpha = 1;
 			explosion_sprite.destroy();
 		});
+
+		this.score += ship.points;
+		this.score_text.text = this.score;
 	}
 }
 
