@@ -116,10 +116,40 @@ class Play extends Phaser.Scene {
 			this.score,
 			score_config
 		);
+
+		this.game_over = false;
+
+		score_config.fixedWidth = 0;
+		
+		this.clock = this.time.delayedCall(1000, () => {
+			this.add.text(
+				game.config.width / 2,
+				game.config.height / 2,
+				'GAME OVER',
+				score_config
+			).setOrigin(0.5, 0);
+
+			this.add.text(
+				game.config.width / 2,
+				game.config.height / 2 + 64,
+				'PRESS (R) TO RESTART.',
+				score_config
+			).setOrigin(0.5, 0);
+
+			this.game_over = true;
+		});
 	}
 
 	update() {
+		if(this.game_over && Phaser.Input.Keyboard.JustDown(key_reset)) {
+			this.scene.restart();
+		}
+
 		this.starfield.tilePositionX -= 4;
+
+		if(this.game_over) {
+			return;
+		}
 
 		this.rocket.update();
 
