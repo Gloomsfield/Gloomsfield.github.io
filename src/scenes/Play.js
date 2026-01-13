@@ -4,6 +4,14 @@ class Play extends Phaser.Scene {
 	}
 
 	create() {
+		this.starfield = this.add.tileSprite(
+			0,
+			0,
+			640,
+			480,
+			'starfield',
+		).setOrigin(0, 0);
+
 		// adds green UI background
 		this.add.rectangle(
 			0,
