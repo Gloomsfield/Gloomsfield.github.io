@@ -53,6 +53,13 @@ class Play extends Phaser.Scene {
 			game.config.height,
 			0xffffff
 		).setOrigin(0, 0);
+
+		this.rocket = new Rocket(
+			this,
+			game.config.width / 2,
+			game.config.height - ui_border_size - ui_border_padding,
+			'rocket'
+		).setOrigin(0.5, 0);
 	}
 
 	update() {
