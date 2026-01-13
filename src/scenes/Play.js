@@ -60,10 +60,17 @@ class Play extends Phaser.Scene {
 			game.config.height - ui_border_size - ui_border_padding,
 			'rocket'
 		).setOrigin(0.5, 0);
+
+		key_fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+		key_reset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+		key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+		key_right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 	}
 
 	update() {
 		this.starfield.tilePositionX -= 4;
+
+		this.rocket.update();
 	}
 }
 
