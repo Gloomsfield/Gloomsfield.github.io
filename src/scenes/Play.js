@@ -104,8 +104,25 @@ class Play extends Phaser.Scene {
 		for(let i = 0; i < this.ships.length; i++) {
 			if(this.ships[i]) {
 				this.ships[i].update();
+
+				if(this.check_collision(this.rocket, this.ships[i])) {
+					console.log('collision!');
+				}
 			}
 		}
+	}
+
+	check_collision(rocket, ship) {
+		if(
+			rocket.x < ship.x ||
+			rocket.x > ship.x + ship.width ||
+			rocket.y < ship.y ||
+			rocket.y > ship.y + ship.height
+		) {
+			return false;
+		}
+
+		return true;
 	}
 }
 
