@@ -121,7 +121,7 @@ class Play extends Phaser.Scene {
 
 		score_config.fixedWidth = 0;
 		
-		this.clock = this.time.delayedCall(1000, () => {
+		this.clock = this.time.delayedCall(60000, () => {
 			this.add.text(
 				game.config.width / 2,
 				game.config.height / 2,
@@ -183,6 +183,7 @@ class Play extends Phaser.Scene {
 
 		let explosion_sprite = this.add.sprite(ship.x, ship.y, 'ship_explosion').setOrigin(0, 0);
 		explosion_sprite.anims.play('ship_explode');
+		this.sound.play('sfx-explosion');
 		explosion_sprite.on('animationcomplete', () => {
 			ship.reset();
 			ship.alpha = 1;
