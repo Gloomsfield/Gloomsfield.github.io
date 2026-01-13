@@ -11,3 +11,9 @@ let config = {
 
 let game = new Phaser.Game(config);
 
+// GLOBALS
+
+// UI
+let ui_border_size = game.config.height / 15;
+let ui_border_padding = ui_border_size / 3;
+
