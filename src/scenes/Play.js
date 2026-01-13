@@ -121,7 +121,7 @@ class Play extends Phaser.Scene {
 
 		score_config.fixedWidth = 0;
 		
-		this.clock = this.time.delayedCall(60000, () => {
+		this.clock = this.time.delayedCall(game.settings.game_time, () => {
 			this.add.text(
 				game.config.width / 2,
 				game.config.height / 2,
