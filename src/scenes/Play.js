@@ -62,32 +62,9 @@ class Play extends Phaser.Scene {
 		).setOrigin(0.5, 0);
 
 		this.ships = [
-			new Spaceship(
-				this,
-				game.config.width + ui_border_size * 6,
-				ui_border_size * 4,
-				'spaceship',
-				0,
-				30
-			).setOrigin(0, 0),
-
-			new Spaceship(
-				this,
-				game.config.width + ui_border_size * 3,
-				ui_border_size * 5 + ui_border_padding * 2,
-				'spaceship',
-				0,
-				20
-			).setOrigin(0, 0),
-
-			new Spaceship(
-				this,
-				game.config.width,
-				ui_border_size * 6 + ui_border_padding * 4,
-				'spaceship',
-				0,
-				10
-			).setOrigin(0, 0),
+			this.ship_spawn({ x: game.config.width + ui_border_size * 6, y: ui_border_size * 4 + ui_border_padding * 0 }, 30),
+			this.ship_spawn({ x: game.config.width + ui_border_size * 3, y: ui_border_size * 5 + ui_border_padding * 2 }, 20),
+			this.ship_spawn({ x: game.config.width + ui_border_size * 0, y: ui_border_size * 6 + ui_border_padding * 4 }, 10),
 		];
 
 		key_fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
@@ -163,6 +140,17 @@ class Play extends Phaser.Scene {
 				}
 			}
 		}
+	}
+
+	ship_spawn(position, points) {
+		return new Spaceship(
+			this,
+			position.x,
+			position.y,
+			'spaceship',
+			0,
+			points
+		).setOrigin(0, 0)
 	}
 
 	check_collision(rocket, ship) {
