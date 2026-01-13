@@ -1,6 +1,6 @@
-// CMPM 120 - rocket patrol tutorial
 // amory acosta
-// winter 2026
+// TODO untitled
+// TODO hours
 
 let config = {
 	type: Phaser.AUTO,
