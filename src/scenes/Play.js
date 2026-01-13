@@ -61,6 +61,35 @@ class Play extends Phaser.Scene {
 			'rocket'
 		).setOrigin(0.5, 0);
 
+		this.ships = [
+			new Spaceship(
+				this,
+				game.config.width + ui_border_size * 6,
+				ui_border_size * 4,
+				'spaceship',
+				0,
+				30
+			).setOrigin(0, 0),
+
+			new Spaceship(
+				this,
+				game.config.width + ui_border_size * 3,
+				ui_border_size * 5 + ui_border_padding * 2,
+				'spaceship',
+				0,
+				20
+			).setOrigin(0, 0),
+
+			new Spaceship(
+				this,
+				game.config.width,
+				ui_border_size * 6 + ui_border_padding * 4,
+				'spaceship',
+				0,
+				10
+			).setOrigin(0, 0),
+		];
+
 		key_fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 		key_reset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
 		key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
@@ -71,6 +100,12 @@ class Play extends Phaser.Scene {
 		this.starfield.tilePositionX -= 4;
 
 		this.rocket.update();
+
+		for(let i = 0; i < this.ships.length; i++) {
+			if(this.ships[i]) {
+				this.ships[i].update();
+			}
+		}
 	}
 }
 
