@@ -17,6 +17,43 @@ let game = new Phaser.Game(config);
 let ui_border_size = game.config.height / 15;
 let ui_border_padding = ui_border_size / 3;
 
+const ui_config = {
+	fontFamily: 'Courier',
+	fontSize: '28px',
+	backgroundColor: '#f3b141',
+	color: '#843605',
+	align: 'right',
+	padding: {
+		top: 5,
+		bottom: 5,
+	},
+};
+
+const ui_accent_config = {
+	fontFamily: 'Courier',
+	fontSize: '28px',
+	backgroundColor: '#f3b141',
+	color: '#843605',
+	align: 'right',
+	padding: {
+		top: 5,
+		bottom: 5,
+	},
+};
+
+const ui_score_config = {
+	fontFamily: 'Courier',
+	fontSize: '28px',
+	backgroundColor: '#f3b141',
+	color: '#843605',
+	align: 'right',
+	padding: {
+		top: 5,
+		bottom: 5,
+	},
+	fixedWidth: 100,
+};
+
 // KEYBIND NAMES
 let key_fire;
 let key_reset;

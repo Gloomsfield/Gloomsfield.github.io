@@ -74,50 +74,26 @@ class Play extends Phaser.Scene {
 
 		this.score = 0;
 
-		let score_config = {
-			fontFamily: 'Courier',
-			fontSize: '28px',
-			backgroundColor: '#f3b141',
-			color: '#843605',
-			align: 'right',
-			padding: {
-				top: 5,
-				bottom: 5,
-			},
-			fixedWidth: 100,
-		};
-
 		this.score_text = this.add.text(
 			ui_border_size + ui_border_padding,
 			ui_border_size + ui_border_padding * 2,
 			this.score,
-			score_config
+			ui_score_config
 		);
 
 		this.game_over = false;
 
-		score_config.fixedWidth = 0;
-		
-		this.clock = this.time.delayedCall(game.settings.game_time, () => {
-			this.add.text(
-				game.config.width / 2,
-				game.config.height / 2,
-				'GAME OVER',
-				score_config
-			).setOrigin(0.5, 0);
-
-			this.add.text(
-				game.config.width / 2,
-				game.config.height / 2 + 64,
-				'PRESS (R) TO RESTART.',
-				score_config
-			).setOrigin(0.5, 0);
-
-			this.game_over = true;
-		});
+		this.time_elapsed = 0;
+		this.time_allotted = game.settings.game_time;
 	}
 
-	update() {
+	update(time, delta) {
+		this.time_elapsed += delta;
+
+		if(this.time_elapsed >= this.time_allotted) {
+			this.end_game();
+		}
+
 		if(this.game_over && Phaser.Input.Keyboard.JustDown(key_reset)) {
 			this.scene.restart();
 		}
@@ -180,6 +156,24 @@ class Play extends Phaser.Scene {
 
 		this.score += ship.points;
 		this.score_text.text = this.score;
+	}
+
+	end_game() {
+		this.add.text(
+			game.config.width / 2,
+			game.config.height / 2,
+			'GAME OVER',
+			ui_config
+		).setOrigin(0.5, 0);
+
+		this.add.text(
+			game.config.width / 2,
+			game.config.height / 2 + 64,
+			'PRESS (R) TO RESTART.',
+			ui_config
+		).setOrigin(0.5, 0);
+
+		this.game_over = true;
 	}
 }
 
