@@ -1,44 +1,66 @@
 class Rocket extends Phaser.GameObjects.Sprite {
-	constructor(scene, x, y, texture, frame) {
-		super(scene, x, y, texture, frame);
+	constructor(scene, position) {
+		super(scene, position.x, position.y, 'rocket', 0);
 
 		scene.add.existing(this);
 
 		this.is_firing = false;
 		this.move_speed = 2;
 
-		this.sfx_shot = scene.sound.add('sfx-rocket');
+		this.base_y = position.y;
+
+		this.sfx_launch = scene.sound.add('sfx_rocket');
+
+		this.move_left_input = scene.input.keyboard.addKey(
+			Phaser.Input.Keyboard.KeyCodes.LEFT,
+			false,
+			true
+		);
+		this.move_right_input = scene.input.keyboard.addKey(
+			Phaser.Input.Keyboard.KeyCodes.RIGHT,
+			false,
+			true
+		);
+
+		this.fire_input = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
+
+		this.move_left_input.on('down', () => {
+			if(this.x > this.width / 2 && !this.is_firing) {
+				this.x -= this.move_speed;
+			}
+		});
+
+		this.move_right_input.on('down', () => {
+			if(this.x < scene.cameras.main.width - (this.width / 2) && !this.is_firing) {
+				this.x += this.move_speed;
+			}
+		});
+
+		this.fire_input.on('down', () => {
+			if(this.is_firing) {
+				return;
+			}
+			
+			this.is_firing = true;
+
+			this.sfx_launch.play();
+		});
 	}
 
 	update() {
-		if(!this.is_firing) {
-			// handle left/right movement
-			if(key_left.isDown && this.x >= ui_border_size + this.width) {
-				this.x -= this.move_speed;
-			} else if(key_right.isDown && this.x <= game.config.width - ui_border_size - this.width) {
-				this.x += this.move_speed;
-			}
-		}
-
-		// handle firing
-		if(Phaser.Input.Keyboard.JustDown(key_fire) && !this.is_firing) {
-			this.is_firing = true;
-
-			this.sfx_shot.play();
-		}
-
-		if(this.is_firing && this.y >= ui_border_size * 3 + ui_border_padding) {
+		if(this.is_firing) {
 			this.y -= this.move_speed;
 		}
 
-		if(this.y <= ui_border_size * 3 + ui_border_padding) {
-			this.emit('alter-timer', -500);
+
+		if(this.y < 0) {
+			this.emit('miss');
 			this.reset();
 		}
 	}
 
 	reset() {
 		this.is_firing = false;
-		this.y = game.config.height - ui_border_size - ui_border_padding;
+		this.y = this.base_y;
 	}
 }

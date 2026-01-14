@@ -8,14 +8,11 @@ let config = {
 	height: 480,
 	antialias: false,
 	roundPixels: true,
-	scene: [ Menu, Play, ],
+	scene: [ Load, Play, Border, Game, UserInterface ],
 };
 
 let game = new Phaser.Game(config);
 
-// GLOBALS
-
-// UI
 let ui_border_size = game.config.height / 15;
 let ui_border_padding = ui_border_size / 3;
 
@@ -55,10 +52,4 @@ const ui_score_config = {
 	},
 	fixedWidth: 100,
 };
-
-// KEYBIND NAMES
-let key_fire;
-let key_reset;
-let key_left;
-let key_right;
 

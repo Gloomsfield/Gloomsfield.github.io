@@ -1,11 +1,13 @@
 class Spaceship extends Phaser.GameObjects.Sprite {
-	constructor(scene, x, y, texture, frame, point_value) {
-		super(scene, x, y, texture, frame);
+	constructor(scene, position, point_value) {
+		super(scene, position.x, position.y, 'spaceship', 0);
 
 		scene.add.existing(this);
 
 		this.points = point_value;
 		this.move_speed = game.settings.ship_speed;
+
+		this.sfx_explosion = scene.sound.add('sfx_explosion');
 	}
 
 	update() {
@@ -17,21 +19,20 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 	}
 
 	explode() {
-		this.emit('alter-timer', 300 * this.points);
-		this.emit('increase-score', this.points);
+		this.emit('explode');
+
+		this.sfx_explosion.play();
 
 		this.setTexture('ship_explosion');
 		this.play('ship_explode');
 
 		this.on('animationcomplete', () => {
 			this.reset();
-			this.setTexture('spaceship');
 		})
-		
-		this.emit('play-sound', 'sfx-explosion');
 	}
 
 	reset() {
+		this.setTexture('spaceship');
 		this.x = game.config.width;
 	}
 }
