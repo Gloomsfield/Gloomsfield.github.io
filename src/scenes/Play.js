@@ -61,11 +61,30 @@ class Play extends Phaser.Scene {
 			'rocket'
 		).setOrigin(0.5, 0);
 
+		this.rocket.on('alter-timer', (delta) => {
+			this.time_allotted += delta;
+		});
+
 		this.ships = [
 			this.ship_spawn({ x: game.config.width + ui_border_size * 6, y: ui_border_size * 4 + ui_border_padding * 0 }, 30),
 			this.ship_spawn({ x: game.config.width + ui_border_size * 3, y: ui_border_size * 5 + ui_border_padding * 2 }, 20),
 			this.ship_spawn({ x: game.config.width + ui_border_size * 0, y: ui_border_size * 6 + ui_border_padding * 4 }, 10),
 		];
+
+		for(let ship of this.ships) {
+			ship.on('alter-timer', (delta) => {
+				this.time_allotted += delta;
+			});
+
+			ship.on('increase-score', (points) => {
+				this.score += points;
+				this.score_text.text = this.score;
+			});
+
+			ship.on('play-sound', (sound_key) => {
+				this.sound.play(sound_key);
+			});
+		}
 
 		key_fire = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 		key_reset = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
@@ -115,18 +134,16 @@ class Play extends Phaser.Scene {
 
 		this.rocket.update();
 
-		for(let i = 0; i < this.ships.length; i++) {
-			if(this.ships[i]) {
-				this.ships[i].update();
+		for(let ship of this.ships) {
+			if(ship) {
+				ship.update();
 
-				if(this.check_collision(this.rocket, this.ships[i])) {
+				if(this.check_collision(this.rocket, ship)) {
 					this.rocket.reset();
-					this.ship_explode(this.ships[i]);
+					ship.explode();
 				}
 			}
 		}
-
-
 	}
 
 	ship_spawn(position, points) {
@@ -137,7 +154,7 @@ class Play extends Phaser.Scene {
 			'spaceship',
 			0,
 			points
-		).setOrigin(0, 0)
+		).setOrigin(0, 0);
 	}
 
 	check_collision(rocket, ship) {
@@ -151,24 +168,6 @@ class Play extends Phaser.Scene {
 		}
 
 		return true;
-	}
-
-	ship_explode(ship) {
-		ship.alpha = 0;
-
-		this.time_allotted += 10000;
-
-		let explosion_sprite = this.add.sprite(ship.x, ship.y, 'ship_explosion').setOrigin(0, 0);
-		explosion_sprite.anims.play('ship_explode');
-		this.sound.play('sfx-explosion');
-		explosion_sprite.on('animationcomplete', () => {
-			ship.reset();
-			ship.alpha = 1;
-			explosion_sprite.destroy();
-		});
-
-		this.score += ship.points;
-		this.score_text.text = this.score;
 	}
 
 	end_game() {

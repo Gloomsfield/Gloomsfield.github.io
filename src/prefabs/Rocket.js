@@ -32,6 +32,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		}
 
 		if(this.y <= ui_border_size * 3 + ui_border_padding) {
+			this.emit('alter-timer', -500);
 			this.reset();
 		}
 	}
