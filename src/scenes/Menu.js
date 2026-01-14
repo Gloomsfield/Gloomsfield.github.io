@@ -31,42 +31,25 @@ class Menu extends Phaser.Scene {
 			frameRate: 30,
 		});
 
-		let menu_config = {
-			fontFamily: 'Courier',
-			fontSize: '28px',
-			backgroundColor: '#f3b141',
-			color: '#843605',
-			align: 'right',
-			padding: {
-				top: 5,
-				bottom: 5
-			},
-			fixedWidth: 0,
-		};
-
-		let menu_accent_config = JSON.parse(JSON.stringify(menu_config));
-		menu_accent_config.backgroundColor = '#00ff00';
-		menu_accent_config.color = '#000000';
-
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2 - ui_border_size - ui_border_padding,
 			'ROCKET PATROL',
-			menu_config
+			ui_config
 		).setOrigin(0.5, 0);
 
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2,
 			'Use <- -> arrows to move and (F) to fire.',
-			menu_config
+			ui_config
 		).setOrigin(0.5, 0);
 
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2 + ui_border_size + ui_border_padding,
 			'Press <- for Novice or -> for Expert.',
-			menu_accent_config
+			ui_accent_config
 		).setOrigin(0.5, 0);
 
 		key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);

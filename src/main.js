@@ -19,7 +19,7 @@ let ui_border_padding = ui_border_size / 3;
 
 const ui_config = {
 	fontFamily: 'Courier',
-	fontSize: '28px',
+	fontSize: '24px',
 	backgroundColor: '#f3b141',
 	color: '#843605',
 	align: 'right',
@@ -31,9 +31,9 @@ const ui_config = {
 
 const ui_accent_config = {
 	fontFamily: 'Courier',
-	fontSize: '28px',
-	backgroundColor: '#f3b141',
-	color: '#843605',
+	fontSize: '24px',
+	backgroundColor: '#00ff00',
+	color: '#000000',
 	align: 'right',
 	padding: {
 		top: 5,
@@ -43,7 +43,7 @@ const ui_accent_config = {
 
 const ui_score_config = {
 	fontFamily: 'Courier',
-	fontSize: '28px',
+	fontSize: '24px',
 	backgroundColor: '#f3b141',
 	color: '#843605',
 	align: 'right',

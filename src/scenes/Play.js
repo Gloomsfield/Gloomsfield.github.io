@@ -81,10 +81,17 @@ class Play extends Phaser.Scene {
 			ui_score_config
 		);
 
-		this.game_over = false;
-
 		this.time_elapsed = 0;
 		this.time_allotted = game.settings.game_time;
+
+		this.timer_text = this.add.text(
+			game.config.width - ui_border_size - ui_border_padding - 100,
+			ui_border_size + ui_border_padding * 2,
+			Number.parseFloat((this.time_allotted - this.time_elapsed) / 1000).toFixed(2),
+			ui_score_config
+		);
+
+		this.game_over = false;
 	}
 
 	update(time, delta) {
@@ -104,6 +111,8 @@ class Play extends Phaser.Scene {
 			return;
 		}
 
+		this.timer_text.text = Number.parseFloat((this.time_allotted - this.time_elapsed) / 1000).toFixed(2);
+
 		this.rocket.update();
 
 		for(let i = 0; i < this.ships.length; i++) {
@@ -116,6 +125,8 @@ class Play extends Phaser.Scene {
 				}
 			}
 		}
+
+
 	}
 
 	ship_spawn(position, points) {
@@ -144,6 +155,8 @@ class Play extends Phaser.Scene {
 
 	ship_explode(ship) {
 		ship.alpha = 0;
+
+		this.time_allotted += 10000;
 
 		let explosion_sprite = this.add.sprite(ship.x, ship.y, 'ship_explosion').setOrigin(0, 0);
 		explosion_sprite.anims.play('ship_explode');
