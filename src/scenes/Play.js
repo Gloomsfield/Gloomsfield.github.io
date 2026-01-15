@@ -42,6 +42,8 @@ class Play extends Phaser.Scene {
 		if(this.time_remaining <= 0) {
 			this.time_remaining = 0;
 			this.game_over = true;
+
+			this.scene.get('user-interface_scene').display_game_over();
 		}
 
 		this.scene.get('user-interface_scene').update_timer(this.time_remaining);

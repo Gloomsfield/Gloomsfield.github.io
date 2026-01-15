@@ -8,7 +8,7 @@ let config = {
 	height: 480,
 	antialias: false,
 	roundPixels: true,
-	scene: [ Load, Play, Border, Game, UserInterface ],
+	scene: [ Load, Menu, Play, Border, Game, UserInterface, ],
 };
 
 let game = new Phaser.Game(config);
@@ -16,7 +16,7 @@ let game = new Phaser.Game(config);
 let ui_border_size = game.config.height / 15;
 let ui_border_padding = ui_border_size / 3;
 
-const ui_config = {
+const text_config = {
 	fontFamily: 'Courier',
 	fontSize: '24px',
 	backgroundColor: '#f3b141',
@@ -28,7 +28,7 @@ const ui_config = {
 	},
 };
 
-const ui_accent_config = {
+const text_accent_config = {
 	fontFamily: 'Courier',
 	fontSize: '24px',
 	backgroundColor: '#00ff00',
@@ -40,7 +40,7 @@ const ui_accent_config = {
 	},
 };
 
-const ui_score_config = {
+const ui_score_text_config = {
 	fontFamily: 'Courier',
 	fontSize: '24px',
 	backgroundColor: '#f3b141',

@@ -6,9 +6,9 @@ class Game extends Phaser.Scene {
 	create() {
 		this.cameras.main.setViewport(
 			ui_border_size,
-			ui_border_size,
+			ui_border_size * 3 + ui_border_padding,
 			game.config.width - (2 * ui_border_size),
-			game.config.height - (2 * ui_border_size)
+			game.config.height - (4 * ui_border_size) - ui_border_padding
 		);
 
 		this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
@@ -26,9 +26,9 @@ class Game extends Phaser.Scene {
 		});
 
 		this.ships = [
-			new Spaceship(this, { x: 0, y: 200 }, 10).setOrigin(0, 0),
-			new Spaceship(this, { x: 0, y: 100 }, 20).setOrigin(0, 0),
-			new Spaceship(this, { x: 0, y: 0 }, 30).setOrigin(0, 0),
+			new Spaceship(this, { x: 0, y: 175 }, 10).setOrigin(0, 0),
+			new Spaceship(this, { x: 0, y: 125 }, 20).setOrigin(0, 0),
+			new Spaceship(this, { x: 0, y: 75 }, 30).setOrigin(0, 0),
 		];
 
 		for(let ship of this.ships) {

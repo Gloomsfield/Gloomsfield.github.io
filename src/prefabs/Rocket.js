@@ -51,8 +51,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		if(this.is_firing) {
 			this.y -= this.move_speed;
 		}
-
-
+		
 		if(this.y < 0) {
 			this.emit('miss');
 			this.reset();

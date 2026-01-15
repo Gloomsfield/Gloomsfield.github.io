@@ -31,10 +31,6 @@ class Load extends Phaser.Scene {
 			frameRate: 30,
 		});
 
-		game.settings = {
-			game_time: 45000,
-			ship_speed: 3,
-		};
-		this.scene.start('play_scene');
+		this.scene.start('menu_scene');
 	}
 }

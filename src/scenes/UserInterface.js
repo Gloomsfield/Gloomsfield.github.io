@@ -17,28 +17,28 @@ class UserInterface extends Phaser.Scene {
 			ui_border_size + ui_border_padding,
 			ui_border_padding,
 			'0',
-			ui_score_config
+			ui_score_text_config
 		);
 
 		this.timer_text = this.add.text(
 			this.cameras.main.width - ui_border_size - ui_border_padding - 100,
 			ui_border_padding,
 			'0',
-			ui_score_config
+			ui_score_text_config
 		);
 
 		this.gameover_text = this.add.text(
 			this.cameras.main.width / 2,
 			this.cameras.main.height / 2,
 			'GAME OVER!',
-			ui_config
+			ui_score_text_config
 		).setOrigin(0.5, 0).setVisible(false);
 
 		this.restart_text = this.add.text(
 			this.cameras.main.width / 2,
 			this.cameras.main.height / 2 + 64,
 			'PRESS (R) TO RESTART.',
-			ui_config
+			ui_score_text_config
 		).setOrigin(0.5, 0).setVisible(false);
 	}
 

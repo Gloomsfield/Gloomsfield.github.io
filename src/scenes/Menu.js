@@ -8,47 +8,47 @@ class Menu extends Phaser.Scene {
 			game.config.width / 2,
 			game.config.height / 2 - ui_border_size - ui_border_padding,
 			'ROCKET PATROL',
-			ui_config
+			text_config
 		).setOrigin(0.5, 0);
 
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2,
 			'Use <- -> arrows to move and (F) to fire.',
-			ui_config
+			text_config
 		).setOrigin(0.5, 0);
 
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2 + ui_border_size + ui_border_padding,
 			'Press <- for Novice or -> for Expert.',
-			ui_accent_config
+			text_accent_config
 		).setOrigin(0.5, 0);
 
-		key_left = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
-		key_right = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
-	}
+		let sfx_select = this.sound.add('sfx_select');
 
-	update() {
-		if(Phaser.Input.Keyboard.JustDown(key_left)) {
+		let key_left_input = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+		let key_right_input = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+
+		key_left_input.on('down', () => {
 			game.settings = {
 				ship_speed: 3,
 				game_time: 60000,
 			};
 
-			this.sound.play('sfx-select');
+			sfx_select.play();
 			this.scene.start('play_scene');
-		}
+		});
 
-		if(Phaser.Input.Keyboard.JustDown(key_right)) {
+		key_right_input.on('down', () => {
 			game.settings = {
 				ship_speed: 4,
 				game_time: 45000,
 			};
 
-			this.sound.play('sfx-select');
+			sfx_select.play();
 			this.scene.start('play_scene');
-		}
+		});
 	}
 }
 
