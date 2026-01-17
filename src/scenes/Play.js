@@ -44,16 +44,13 @@ class Play extends Phaser.Scene {
 			this.game_over = true;
 
 			this.scene.get('user-interface_scene').display_game_over();
+			this.scene.pause('game_scene');
 		}
 
 		this.scene.get('user-interface_scene').update_timer(this.time_remaining);
 	}
 
 	reset() {
-		this.scene.remove('border_scene');
-		this.scene.remove('game_scene');
-		this.scene.remove('user-interface_scene');
-
 		this.scene.restart();
 	}
 }
