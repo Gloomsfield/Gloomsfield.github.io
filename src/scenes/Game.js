@@ -11,8 +11,6 @@ class Game extends Phaser.Scene {
 			game.config.height - (4 * ui_border_size) - ui_border_padding
 		);
 
-		this.starfield = this.add.tileSprite(0, 0, 640, 480, 'starfield').setOrigin(0, 0);
-
 		this.rocket = new Rocket(
 			this,
 			{

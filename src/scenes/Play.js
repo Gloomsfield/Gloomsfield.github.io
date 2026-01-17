@@ -10,6 +10,8 @@ class Play extends Phaser.Scene {
 
 		this.scene.launch('border_scene');
 
+		this.scene.launch('background_scene');
+
 		this.scene.launch('game_scene');
 
 		this.scene.launch('user-interface_scene');

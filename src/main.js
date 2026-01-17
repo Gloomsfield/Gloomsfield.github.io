@@ -8,7 +8,7 @@ let config = {
 	height: 480,
 	antialias: false,
 	roundPixels: true,
-	scene: [ Load, Menu, Play, Border, Game, UserInterface, ],
+	scene: [ Load, Menu, Play, Border, Background, Game, UserInterface, ],
 };
 
 let game = new Phaser.Game(config);
