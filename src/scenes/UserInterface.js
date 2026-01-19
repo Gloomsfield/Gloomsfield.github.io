@@ -14,18 +14,18 @@ class UserInterface extends Phaser.Scene {
 		this.cameras.main.setBackgroundColor(0x00ff00);
 
 		this.score_text = this.add.text(
-			ui_border_size + ui_border_padding,
 			ui_border_padding,
+			this.cameras.main.height / 2,
 			'0',
 			ui_score_text_config
-		);
+		).setOrigin(0, 0.5);
 
 		this.timer_text = this.add.text(
-			this.cameras.main.width - ui_border_size - ui_border_padding - 100,
-			ui_border_padding,
+			this.cameras.main.width - ui_border_padding,
+			this.cameras.main.height / 2,
 			'0',
 			ui_score_text_config
-		);
+		).setOrigin(1, 0.5);
 
 		this.gameover_text = this.add.text(
 			this.cameras.main.width / 2,
