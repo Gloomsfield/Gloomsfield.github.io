@@ -11,6 +11,8 @@ class Game extends Phaser.Scene {
 			game.config.height - (4 * ui_border_size) - ui_border_padding
 		);
 
+		this.planet = new Planet(this);
+
 		this.rocket = new Rocket(
 			this,
 			{
