@@ -16,13 +16,13 @@ class Planet extends Phaser.GameObjects.Shader {
 		scene.add.existing(this);
 	}
 
-	alterRadius(delta) {
+	alter_radius(delta) {
 		this.radius += delta;
 
 		this.setUniform('radius', this.radius);
 	}
 
-	setRadius(new_radius) {
+	set_radius(new_radius) {
 		this.radius = new_radius;
 
 		this.setUniform('radius', this.radius);
