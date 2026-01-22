@@ -11,7 +11,10 @@ class Game extends Phaser.Scene {
 			game.config.height - (4 * ui_border_size) - ui_border_padding
 		);
 
-		this.planet = new Planet(this);
+		this.planet = new Planet(this, 10.0);
+		this.planet.setRenderToTexture('planet_texture');
+
+		this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'planet_texture');
 
 		this.rocket = new Rocket(
 			this,
@@ -39,7 +42,7 @@ class Game extends Phaser.Scene {
 		}
 	}
 
-	update() {
+	update(time, delta) {
 		this.rocket.update();
 
 		for(let ship of this.ships) {

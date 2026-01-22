@@ -9,6 +9,12 @@ class Load extends Phaser.Scene {
 		this.load.image('spaceship', './assets/ship.png');
 		this.load.image('starfield', './assets/background.png');
 
+		this.load.glsl({
+			key: 'planet_frag-shader',
+			shaderType: 'fragment',
+			url: './assets/shaders/planet_frag.glsl',
+		});
+
 		this.load.spritesheet('ship_explosion', './assets/ship_explosion.png', {
 			frameWidth: 64,
 			frameHeight: 32,
