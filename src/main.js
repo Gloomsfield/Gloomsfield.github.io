@@ -1,55 +1,28 @@
+// code practice 02 - beyond orthogonal
 // amory acosta
-// TODO untitled
-// TODO hours
+// 2026/01/23
+
+// spritesheet by ElvGames: https://elv-games.itch.io/free-fantasy-dreamland-sprites
+
+"use strict"
 
 let config = {
-	type: Phaser.AUTO,
-	width: 640,
-	height: 480,
+    type: Phaser.AUTO,
+    width: 800,
+    height: 800,
 	antialias: false,
 	roundPixels: true,
-	scene: [ Load, Menu, Play, Border, Background, Game, UserInterface, ],
+	render: { pixelArt: true, },
+	physics: {
+		default: 'arcade',
+		arcade: {
+			debug: true,
+		},
+	},
+    scene: [ Movement ]
 };
 
 let game = new Phaser.Game(config);
 
-let ui_border_size = game.config.height / 15;
-let ui_border_padding = ui_border_size / 3;
-
-const text_config = {
-	fontFamily: 'Courier',
-	fontSize: '24px',
-	backgroundColor: '#f3b141',
-	color: '#843605',
-	align: 'right',
-	padding: {
-		top: 5,
-		bottom: 5,
-	},
-};
-
-const text_accent_config = {
-	fontFamily: 'Courier',
-	fontSize: '24px',
-	backgroundColor: '#00ff00',
-	color: '#000000',
-	align: 'right',
-	padding: {
-		top: 5,
-		bottom: 5,
-	},
-};
-
-const ui_score_text_config = {
-	fontFamily: 'Courier',
-	fontSize: '24px',
-	backgroundColor: '#f3b141',
-	color: '#843605',
-	align: 'right',
-	padding: {
-		top: 5,
-		bottom: 5,
-	},
-	fixedWidth: 100,
-};
-
+let cursors;
+let { height, width } = game.config;
