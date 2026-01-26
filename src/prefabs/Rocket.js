@@ -25,14 +25,14 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		this.fire_input = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
 
 		this.move_left_input.on('down', () => {
-			if(this.x > this.width / 2 && !this.is_firing) {
-				this.x -= this.move_speed;
+			if(!this.is_firing) {
+				this.emit("move-left");
 			}
 		});
 
 		this.move_right_input.on('down', () => {
-			if(this.x < scene.cameras.main.width - (this.width / 2) && !this.is_firing) {
-				this.x += this.move_speed;
+			if(!this.is_firing) {
+				this.emit("move-right");
 			}
 		});
 

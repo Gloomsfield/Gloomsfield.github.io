@@ -3,6 +3,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 		super(scene, position.x, position.y, 'spaceship', 0);
 
 		scene.add.existing(this);
+		scene.physics.add.existing(this);
 
 		this.points = point_value;
 		this.move_speed = game.settings.ship_speed;
@@ -11,11 +12,7 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 	}
 
 	update() {
-		this.x -= this.move_speed;
-
-		if(this.x <= -this.width) {
-			this.reset();
-		}
+		this.rotation = Math.atan2(-this.body.velocity.y, -this.body.velocity.x);
 	}
 
 	explode() {

@@ -8,6 +8,12 @@ let config = {
 	height: 480,
 	antialias: false,
 	roundPixels: true,
+	physics: {
+		default: 'arcade',
+		arcade: {
+			debug: true,
+		},
+	},
 	scene: [ Load, Menu, Play, Border, Background, Game, UserInterface, ],
 };
 
