@@ -14,6 +14,9 @@ class Game extends Phaser.Scene {
 		this.radius = 50.0;
 		this.gravity = 10.0;
 
+		this.camera_theta = 0.0;
+		this.camera_goal_theta = 0.0;
+
 		this.planet = new Planet(this, this.radius);
 		this.planet.setRenderToTexture('planet_texture');
 
@@ -21,22 +24,16 @@ class Game extends Phaser.Scene {
 
 		this.rocket = new Rocket(
 			this,
-			{
-				x: this.cameras.main.width / 2,
-				y: this.cameras.main.height - ui_border_padding,
-			},
-		).setOrigin(0.5, 0);
+			this.radius + 10,
+			0
+		).setOrigin(0.5, 0.5);
 
 		this.rocket.on('miss', () => {
 			this.events.emit('alter-timer', -500);
 		});
 
-		this.rocket.on('move-left', () => {
-			this.rotate_world(1);
-		});
-
-		this.rocket.on('move-right', () => {
-			this.rotate_world(-1);
+		this.rocket.on('reframe', (theta) => {
+			this.camera_goal_theta = theta;
 		});
 
 		this.ships = [
@@ -58,17 +55,21 @@ class Game extends Phaser.Scene {
 	update(time, delta) {
 		this.last_delta = delta;
 
-		this.rocket.update();
+		this.rocket.update(time, delta, this.radius);
 
 		for(let ship of this.ships) {
 			this.apply_planetary_gravity(ship);
 			ship.update();
 
-			// if(this.check_collision(this.rocket, ship)) {
-			// 	this.rocket.reset();
-			// 	ship.explode();
-			// }
+			if(this.check_collision(this.rocket, ship)) {
+				this.rocket.reset();
+				ship.explode();
+			}
 		}
+
+		this.camera_theta = interpolate_angle(this.camera_goal_theta, this.camera_theta, 0.5);
+		
+		this.cameras.main.setRotation(this.camera_theta);
 	}
 
 	check_collision(rocket, ship) {
@@ -100,12 +101,6 @@ class Game extends Phaser.Scene {
 
 		gameobject.body.velocity.x -= gravity_dir.x * this.gravity * this.last_delta / 1000;
 		gameobject.body.velocity.y -= gravity_dir.y * this.gravity * this.last_delta / 1000;
-
-		console.log(`xpos: ${gameobject.body.x}`);
-	}
-
-	rotate_world(direction) {
-		this.cameras.main.setRotation(this.cameras.main.rotation + direction * this.last_delta / 1000);
 	}
 }
 

@@ -59,3 +59,23 @@ const ui_score_text_config = {
 	fixedWidth: 100,
 };
 
+let interpolation_mode = {
+	type: 'constant',
+	angle_delta: 1.0,
+	restrict: true,
+};
+
+function mod(n, d) {
+	return ((n % d) + d) % d;
+}
+
+// sourced from https://stackoverflow.com/a/14498790
+function interpolate_angle(target_angle, current_angle, angular_delta) {
+	let end = target_angle;
+	let start = current_angle;
+	
+	let shortest_angle = mod(mod(end - start, 2.0 * Math.PI) + 3.0 * Math.PI, 2.0 * Math.PI) - Math.PI;
+
+	return current_angle + angular_delta * shortest_angle;
+}
+
