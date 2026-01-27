@@ -35,7 +35,8 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		move_direction += Number(this.move_right_input.isDown && !this.is_firing);
 		move_direction -= Number(this.move_left_input.isDown && !this.is_firing);
 
-		this.iterate_theta(delta, move_direction);
+		this.change_theta(this.move_speed * move_direction * delta / 1000 / this.r);
+		this.iterate_theta(delta);
 		
 		this.r += Number(this.is_firing) * this.move_speed * delta / 1000;
 
@@ -62,11 +63,14 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		};
 	}
 
-	iterate_theta(delta, direction) {
+	iterate_theta(delta) {
 		let angular_delta = this.move_speed * delta / 1000 / this.r;
 
-		this.theta.target += direction * angular_delta;
 		this.theta.current = interpolate_angle(this.theta.target, this.theta.current, angular_delta);
+	}
+
+	change_theta(delta) {
+		this.theta.target += delta;
 	}
 
 	reset() {
