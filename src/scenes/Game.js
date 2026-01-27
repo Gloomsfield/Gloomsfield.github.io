@@ -46,6 +46,8 @@ class Game extends Phaser.Scene {
 			ship.on('explode', () => {
 				this.events.emit('alter-timer', ship.points * 500);
 				this.events.emit('alter-score', ship.points);
+
+				this.ships.splice(this.ships.indexOf(ship), 1);
 			});
 		}
 
