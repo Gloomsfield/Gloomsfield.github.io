@@ -9,6 +9,8 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 
 		this.point_value = point_value;
 		this.move_speed = game.settings.ship_speed;
+
+		this.body.velocity.x = 10.0;
 	}
 
 	update() {
@@ -23,10 +25,6 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 		this.setTexture('ship_explosion');
 		this.play('ship_explode');
 
-		this.on('animationcomplete', this.despawn, this)
-	}
-
-	despawn() {
-		this.destroy();
+		this.body.checkCollision.none = true;
 	}
 }

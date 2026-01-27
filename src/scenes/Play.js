@@ -4,6 +4,13 @@ class Play extends Phaser.Scene {
 	}
 
 	create() {
+		let game_viewport_rect = {
+			x: ui_border_size,
+			y: ui_border_size * 3 + ui_border_padding,
+			width: game.config.width - (2 * ui_border_padding),
+			height: game.config.height - (4 * ui_border_size) - ui_border_padding,
+		};
+
 		this.time_remaining = game.settings.game_time;
 		this.score = 0;
 		this.game_over = false;
@@ -12,7 +19,7 @@ class Play extends Phaser.Scene {
 
 		this.scene.launch('background_scene');
 
-		this.scene.launch('game_scene');
+		this.scene.launch('game_scene', game_viewport_rect);
 
 		this.scene.launch('user-interface_scene');
 

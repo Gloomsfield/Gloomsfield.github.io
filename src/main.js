@@ -69,6 +69,10 @@ function mod(n, d) {
 	return ((n % d) + d) % d;
 }
 
+function clamp(value, min, max) {
+	return Math.min(Math.max(value, min), max);
+}
+
 // sourced from https://stackoverflow.com/a/14498790
 function interpolate_angle(target_angle, current_angle, angular_delta) {
 	let end = target_angle;

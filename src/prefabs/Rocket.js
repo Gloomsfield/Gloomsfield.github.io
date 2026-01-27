@@ -1,49 +1,45 @@
 class Rocket extends Phaser.GameObjects.Sprite {
-	constructor(scene, r, theta) {
-		super(scene, r * Math.cos(theta), r * Math.sin(theta), 'rocket', 0);
+	constructor(scene, x, y) {
+		super(scene, x, y, 'rocket', 0);
 
 		scene.add.existing(this);
 		scene.physics.add.existing(this);
 
 		this.sfx_launch = scene.sound.add('sfx_rocket');
-
-		this.viewport_center_offset = {
-			x: scene.cameras.main.width / 2,
-			y: scene.cameras.main.height / 2
-		};
 		
-		this.r = r;
-		this.theta = { target: theta, current: theta };
-
 		this.is_firing = false;
 
-		this.move_speed = 200;
+		this.move_speed = 500;
+		this.max_speed = 200;
+		this.drag = 0.975;
 
 		let scene_keyboard = scene.input.keyboard;
 		this.move_left_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT, false, true);
 		this.move_right_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT, false, true);
-		this.fire_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-		this.reframe_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+		this.move_up_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP, false, true);
+		this.move_down_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN, false, true);
+		this.fire_input = scene_keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
 
 		this.fire_input.on('down', this.fire, this);
-		this.reframe_input.on('down', this.reframe, this);
 	}
 
 	update(_, delta) {
-		let move_direction = 0;
+		this.body.velocity.setLength(clamp(this.body.velocity.length() * this.drag, 0, this.max_speed));
 
-		move_direction += Number(this.move_right_input.isDown && !this.is_firing);
-		move_direction -= Number(this.move_left_input.isDown && !this.is_firing);
+		let move_direction = new Phaser.Math.Vector2(0, 0);
 
-		this.change_theta(this.move_speed * move_direction * delta / 1000 / this.r);
-		this.iterate_theta(delta);
-		
-		this.r += Number(this.is_firing) * this.move_speed * delta / 1000;
+		move_direction.x += Number(this.move_right_input.isDown && !this.is_firing);
+		move_direction.x -= Number(this.move_left_input.isDown && !this.is_firing);
 
-		this.x = this.get_cartesian().x;
-		this.y = this.get_cartesian().y;
+		move_direction.y += Number(this.move_up_input.isDown && !this.is_firing);
+		move_direction.y -= Number(this.move_down_input.isDown && !this.is_firing);
 
-		this.rotation = this.theta.current + Math.PI / 2.0;
+		move_direction.normalize();
+
+		this.body.velocity.x += move_direction.x * this.move_speed * delta / 1000;
+		this.body.velocity.y -= move_direction.y * this.move_speed * delta / 1000;
+
+		this.body.velocity.setLength(clamp(this.body.velocity.length(), 0, this.max_speed));
 	}
 
 	fire() {
@@ -52,28 +48,7 @@ class Rocket extends Phaser.GameObjects.Sprite {
 		this.is_firing = true;
 	}
 
-	reframe() {
-		this.emit('reframe', 1.5 * Math.PI - this.theta.current);
-	}
-
-	get_cartesian() {
-		return {
-			x: this.r * Math.cos(this.theta.current) + this.viewport_center_offset.x,
-			y: this.r * Math.sin(this.theta.current) + this.viewport_center_offset.y,
-		};
-	}
-
-	iterate_theta(delta) {
-		let angular_delta = this.move_speed * delta / 1000 / this.r;
-
-		this.theta.current = interpolate_angle(this.theta.target, this.theta.current, angular_delta);
-	}
-
-	change_theta(delta) {
-		this.theta.target += delta;
-	}
-
-	reset() {
-		this.is_firing = false;
+	despawn() {
+		this.destroy();
 	}
 }
