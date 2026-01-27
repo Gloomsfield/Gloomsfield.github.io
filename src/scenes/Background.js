@@ -1,6 +1,8 @@
 class Background extends Phaser.Scene {
 	constructor() {
 		super('background_scene');
+
+		this.direction = new Phaser.Math.Vector2(-1.0, 0.0);
 	}
 
 	create() {
@@ -15,6 +17,7 @@ class Background extends Phaser.Scene {
 	}
 
 	update() {
-		this.starfield.tilePositionX -= 2;
+		this.starfield.tilePositionX += 2.0 * this.direction.x;
+		this.starfield.tilePositionY += 2.0 * this.direction.y;
 	}
 }

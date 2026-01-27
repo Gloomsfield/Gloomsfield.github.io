@@ -50,6 +50,11 @@ class Play extends Phaser.Scene {
 		}
 
 		this.scene.get('user-interface_scene').update_timer(this.time_remaining);
+
+		let theta = this.scene.get('game_scene').camera_theta;
+
+		this.scene.get('background_scene').direction.x = Math.cos(theta);
+		this.scene.get('background_scene').direction.y = Math.sin(theta);
 	}
 
 	reset() {
