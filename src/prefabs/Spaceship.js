@@ -1,6 +1,6 @@
 class Spaceship extends Phaser.GameObjects.Sprite {
-	constructor(scene, position, point_value) {
-		super(scene, position.x, position.y, 'spaceship', 0);
+	constructor(scene, x, y, point_value) {
+		super(scene, x, y, 'spaceship', 0);
 
 		scene.add.existing(this);
 		scene.physics.add.existing(this);
