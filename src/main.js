@@ -59,12 +59,6 @@ const ui_score_text_config = {
 	fixedWidth: 100,
 };
 
-let interpolation_mode = {
-	type: 'constant',
-	angle_delta: 1.0,
-	restrict: true,
-};
-
 function mod(n, d) {
 	return ((n % d) + d) % d;
 }
