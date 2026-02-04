@@ -6,6 +6,7 @@ class Load extends Phaser.Scene {
 	preload() {
 		this.load.image('rocket', './assets/rocket.png');
 		this.load.image('spaceship', './assets/ship.png');
+		this.load.image('ufo', './assets/ufo.png');
 		this.load.image('starfield', './assets/background.png');
 
 		this.load.spritesheet('ship_explosion', './assets/ship_explosion.png', {
@@ -13,6 +14,13 @@ class Load extends Phaser.Scene {
 			frameHeight: 32,
 			startFrame: 0,
 			endFrame: 10,
+		});
+
+		this.load.spritesheet('ufo_explosion', './assets/ufo_explosion.png', {
+			frameWidth: 64,
+			frameHeight: 32,
+			startFrame: 0,
+			endFrame: 14,
 		});
 
 		this.load.audio('sfx_select', './assets/select.wav');
@@ -26,6 +34,16 @@ class Load extends Phaser.Scene {
 			frames: this.anims.generateFrameNumbers('ship_explosion', {
 				start: 0,
 				end: 10,
+				first: 0,
+			}),
+			frameRate: 30,
+		});
+
+		this.anims.create({
+			key: 'ufo_explode',
+			frames: this.anims.generateFrameNumbers('ufo_explosion', {
+				start: 0,
+				end: 14,
 				first: 0,
 			}),
 			frameRate: 30,

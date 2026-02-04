@@ -26,8 +26,9 @@ class Game extends Phaser.Scene {
 		this.ships = [
 			new Spaceship(this, { x: 0, y: 175 }, 10).setOrigin(0, 0),
 			new Spaceship(this, { x: 0, y: 125 }, 20).setOrigin(0, 0),
-			new Spaceship(this, { x: 0, y: 75 }, 30).setOrigin(0, 0),
 		];
+
+		this.ufo = new UFO(this, { x: 0, y: 75 }, 30).setOrigin(0, 0);
 
 		for(let ship of this.ships) {
 			ship.on('explode', () => {
@@ -35,9 +36,14 @@ class Game extends Phaser.Scene {
 				this.events.emit('alter-score', ship.points);
 			});
 		}
+
+		this.ufo.on('explode', () => {
+			this.events.emit('alter-timer', this.ufo.points * 500);
+			this.events.emit('alter-score', this.ufo.points);
+		});
 	}
 
-	update() {
+	update(time, delta) {
 		this.rocket.update();
 
 		for(let ship of this.ships) {
@@ -47,6 +53,13 @@ class Game extends Phaser.Scene {
 				this.rocket.reset();
 				ship.explode();
 			}
+		}
+
+		this.ufo.update(time, delta);
+
+		if(this.check_collision(this.rocket, this.ufo)) {
+			this.rocket.reset();
+			this.ufo.explode();
 		}
 	}
 

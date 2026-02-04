@@ -33,6 +33,8 @@ class Menu extends Phaser.Scene {
 		key_left_input.on('down', () => {
 			game.settings = {
 				ship_speed: 3,
+				ufo_speed_min: 3,
+				ufo_speed_max: 4,
 				game_time: 60000,
 			};
 
@@ -43,6 +45,8 @@ class Menu extends Phaser.Scene {
 		key_right_input.on('down', () => {
 			game.settings = {
 				ship_speed: 4,
+				ufo_speed_min: 4,
+				ufo_speed_max: 12,
 				game_time: 45000,
 			};
 
