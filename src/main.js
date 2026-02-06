@@ -6,6 +6,7 @@
 // timing/scoring mechanism - 5pts
 // new enemy spaceship - 5pts
 // rocket mouse control - 5pts
+// implement parallax - 3pts
 // control after fire - 1pt
 // randomize ship direction - 1pt
 

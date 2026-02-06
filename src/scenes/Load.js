@@ -7,7 +7,7 @@ class Load extends Phaser.Scene {
 		this.load.image('rocket', './assets/rocket.png');
 		this.load.image('spaceship', './assets/ship.png');
 		this.load.image('ufo', './assets/ufo.png');
-		this.load.image('starfield', './assets/background.png');
+		this.load.image('starfield', './assets/space.png');
 
 		this.load.spritesheet('ship_explosion', './assets/ship_explosion.png', {
 			frameWidth: 64,
