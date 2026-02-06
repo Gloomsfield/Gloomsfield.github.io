@@ -14,7 +14,7 @@ class Menu extends Phaser.Scene {
 		this.add.text(
 			game.config.width / 2,
 			game.config.height / 2,
-			'Use <- -> arrows to move and (F) to fire.',
+			'Mouse to move and Left Click to fire.',
 			text_config
 		).setOrigin(0.5, 0);
 
