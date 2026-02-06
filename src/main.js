@@ -5,6 +5,7 @@
 // features implemented
 // timing/scoring mechanism - 5pts
 // new enemy spaceship - 5pts
+// rocket mouse control - 5pts
 
 let config = {
 	type: Phaser.AUTO,

@@ -11,40 +11,18 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
 		this.sfx_launch = scene.sound.add('sfx_rocket');
 
-		this.move_left_input = scene.input.keyboard.addKey(
-			Phaser.Input.Keyboard.KeyCodes.LEFT,
-			false,
-			true
+		this.move_left_input = scene.input.on(
+			"pointerdown",
+			() => {
+				if(this.is_firing) {
+					return;
+				}
+
+				this.is_firing = true;
+
+				this.sfx_launch.play();
+			}
 		);
-		this.move_right_input = scene.input.keyboard.addKey(
-			Phaser.Input.Keyboard.KeyCodes.RIGHT,
-			false,
-			true
-		);
-
-		this.fire_input = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.F);
-
-		this.move_left_input.on('down', () => {
-			if(this.x > this.width / 2 && !this.is_firing) {
-				this.x -= this.move_speed;
-			}
-		});
-
-		this.move_right_input.on('down', () => {
-			if(this.x < scene.cameras.main.width - (this.width / 2) && !this.is_firing) {
-				this.x += this.move_speed;
-			}
-		});
-
-		this.fire_input.on('down', () => {
-			if(this.is_firing) {
-				return;
-			}
-			
-			this.is_firing = true;
-
-			this.sfx_launch.play();
-		});
 	}
 
 	update() {
@@ -56,6 +34,14 @@ class Rocket extends Phaser.GameObjects.Sprite {
 			this.emit('miss');
 			this.reset();
 		}
+	}
+
+	set_x(new_x) {
+		if(this.is_firing) {
+			return;
+		}
+
+		this.x = Math.max(0, Math.min(new_x, config.width));
 	}
 
 	reset() {

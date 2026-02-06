@@ -44,6 +44,7 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, delta) {
+		this.rocket.set_x(this.input.activePointer.x - ui_border_size);
 		this.rocket.update();
 
 		for(let ship of this.ships) {
