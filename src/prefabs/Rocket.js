@@ -37,10 +37,6 @@ class Rocket extends Phaser.GameObjects.Sprite {
 	}
 
 	set_x(new_x) {
-		if(this.is_firing) {
-			return;
-		}
-
 		this.x = Math.max(0, Math.min(new_x, config.width));
 	}
 
