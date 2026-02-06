@@ -7,13 +7,20 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 		this.points = point_value;
 		this.move_speed = game.settings.ship_speed;
 
+		this.direction = Math.floor(Math.random() * 2.0) * 2.0 - 1.0;
+		this.setFlipX(this.direction < 0);
+
 		this.sfx_explosion = scene.sound.add('sfx_explosion');
 	}
 
 	update() {
-		this.x -= this.move_speed;
+		this.x -= this.move_speed * this.direction;
 
-		if(this.x <= -this.width) {
+		if(this.x <= -this.width - config.width / 4.0) {
+			this.reset();
+		}
+
+		if(this.x >= config.width + this.width + config.width / 4.0) {
 			this.reset();
 		}
 	}
@@ -33,6 +40,6 @@ class Spaceship extends Phaser.GameObjects.Sprite {
 
 	reset() {
 		this.setTexture('spaceship');
-		this.x = game.config.width;
+		this.x = config.width / 2.0 * (1 + this.direction) + this.direction * config.width / 5.0;
 	}
 }
