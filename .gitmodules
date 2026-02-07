@@ -1,0 +1,3 @@
+[submodule "projects/cmpm120_rocket-patrol-mod"]
+	path = projects/cmpm120_rocket-patrol-mod
+	url = https://github.com/Gloomsfield/cmpm120_rocket-patrol-mod.git
