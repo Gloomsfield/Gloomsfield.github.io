@@ -4,3 +4,6 @@
 [submodule "projects/cmpm120_code-practice-04"]
 	path = projects/cmpm120_code-practice-04
 	url = https://github.com/Gloomsfield/cmpm120_code-practice-04.git
+[submodule "projects/cmpm120_code-practice-05"]
+	path = projects/cmpm120_code-practice-05
+	url = https://github.com/Gloomsfield/cmpm120_code-practice-05.git
