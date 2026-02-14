@@ -7,3 +7,6 @@
 [submodule "projects/cmpm120_code-practice-05"]
 	path = projects/cmpm120_code-practice-05
 	url = https://github.com/Gloomsfield/cmpm120_code-practice-05.git
+[submodule "projects/cmpm120_endless-runner"]
+	path = projects/cmpm120_endless-runner
+	url = https://github.com/Gloomsfield/cmpm120_endless-runner.git
