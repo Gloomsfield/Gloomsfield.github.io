@@ -16,3 +16,6 @@
 [submodule "projects/cmpm120_code-practice-07"]
 	path = projects/cmpm120_code-practice-07
 	url = https://github.com/Gloomsfield/cmpm120_code-practice-07.git
+[submodule "projects/cmpm120_playable-postcard"]
+	path = projects/cmpm120_playable-postcard
+	url = https://github.com/Gloomsfield/cmpm120_playable-postcard.git
