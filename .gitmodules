@@ -19,3 +19,6 @@
 [submodule "projects/cmpm120_playable-postcard"]
 	path = projects/cmpm120_playable-postcard
 	url = https://github.com/Gloomsfield/cmpm120_playable-postcard.git
+[submodule "projects/cmpm176_tic-tac-bid"]
+	path = projects/cmpm176_tic-tac-bid
+	url = https://github.com/Gloomsfield/cmpm176_tic-tac-bid.git
