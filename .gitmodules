@@ -25,3 +25,6 @@
 [submodule "projects/cmpm170_sprint-1"]
 	path = projects/cmpm170_sprint-1
 	url = https://github.com/Gloomsfield/cmpm170_sprint-1.git
+[submodule "projects/cmpm170_sprint-2"]
+	path = projects/cmpm170_sprint-2
+	url = https://github.com/Gloomsfield/cmpm170_sprint-2.git
